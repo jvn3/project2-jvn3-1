@@ -1,38 +1,62 @@
 import './App.css';
 import {useEffect, useState} from 'react';
-import Board from './board';
+import Board from './Board';
 import io from 'socket.io-client';
+import {calculateWinner} from './helper';
 
 
 const socket = io();
 
-function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+const styles = {
+    width: '200px',
+    margin: '20px auto',
+};
 
+function App() {
+  
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [xIsNext, setXisNext] = useState(true);
+  const winner = calculateWinner(board);
+  
   function handleClick(i){
-    const temp = [...board];
-    temp[i] = 'X';
-    setBoard(temp);
+    const boardCopy = [...board];
+    if(winner || boardCopy[i]) return;
+    boardCopy[i] = xIsNext ? 'X' : 'O';
+    setBoard(boardCopy);
+    setXisNext(!xIsNext);
     const cc = Number(i);
     socket.emit('isPlay', cc);
+  }
+  
+  function renderMoves(){
+    return(
+        <button onClick={() => setBoard(Array(9).fill(null))}>
+            Start Game
+        </button>
+      );
   }
   
   useEffect(() => {
     socket.on('isPlay', (data) => {
       console.log('A move had been made at ' + (data+1));
-      const temp1 = [...board];
-      temp1[data] = 'X';
-      setBoard(temp1);
+      const boardCopy = [...board];
+      if(winner || boardCopy[data]) return;
+      boardCopy[data] = xIsNext ? 'X' : 'O';
+      setBoard(boardCopy);
+      setXisNext(!xIsNext);
     });
   }, [handleClick]);
 
 
-  return (
-    <div>
-      <h1> Tic Tac Toe Board Game </h1>
-      <Board squares={board} onClick={handleClick} />
-    </div>
-  );
+    return (
+        <>
+            <Board squares={board} onClick={handleClick} />
+            <div style={styles}>
+                <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
+                  {renderMoves()}
+            </div>
+        </>
+    )
 }
 
 export default App;
