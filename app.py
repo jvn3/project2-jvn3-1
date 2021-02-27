@@ -38,6 +38,16 @@ def moveMade(data):
     socketio.emit('isPlay',  data, broadcast=True, include_self=False)
 
 
+@socketio.on('chat')
+def on_chat(data):
+    print(str(data))
+    socketio.emit('chat',  data, broadcast=True, include_self=False)
+
+@socketio.on('game')
+def clearGame(data):
+    print(data)
+    socketio.emit('game', data , broadcast=True, include_self=False)
+
 socketio.run(
     app,
     host=os.getenv('IP', '0.0.0.0'),
