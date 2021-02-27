@@ -49,7 +49,7 @@ function App() {
   const fetchUserName = () => {
     if(userName != null){
       const user_name = userName.current.value;
-      
+      setName(prevName => [...prevName, user_name]);
       setModalIsOpen(false)
     }
   }
@@ -97,6 +97,7 @@ function App() {
             <div>
             <Board squares={board} onClick={handleClick} />
             <div style={styles}>
+                <p> X : {user[0]} O: {user[1]} </p>
                 <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
                 <button onClick={restartGame}> Start Game </button>
             </div>
@@ -108,6 +109,4 @@ function App() {
     )
 }
 
-
-//{messages.map((item, index) => <ListItem key={index} name= {item} />)}
 export default App;
