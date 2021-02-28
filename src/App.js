@@ -55,6 +55,7 @@ function App() {
     function handleClick(i){
     
     if(localName[0] == name[0] || localName[0] == name[1]){
+      if(localName[0] == name[0] && xIsNext){
       const boardCopy = [...board];
       if(winner || boardCopy[i]) return;
         boardCopy[i] = xIsNext ? 'X' : 'O';
@@ -62,6 +63,16 @@ function App() {
         setXisNext(!xIsNext);
         const cc = Number(i);
         socket.emit('isPlay', cc);
+      }
+      else if(localName[0] == name[1] && !xIsNext){
+      const boardCopy = [...board];
+      if(winner || boardCopy[i]) return;
+        boardCopy[i] = xIsNext ? 'X' : 'O';
+        setBoard(boardCopy);
+        setXisNext(!xIsNext);
+        const cc = Number(i);
+        socket.emit('isPlay', cc);
+      }
     }
     }
 
@@ -110,8 +121,6 @@ function App() {
   }, [restartGame]);
 
     return (
-      
-      
         <>  
         <div>
         <div> 
