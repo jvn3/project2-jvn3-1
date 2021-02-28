@@ -48,6 +48,11 @@ def clearGame(data):
     print(data)
     socketio.emit('game', data , broadcast=True, include_self=False)
 
+@socketio.on('logIn')
+def logIn(data):
+    print(str(data))
+    socketio.emit('logIn', data , broadcast=True, include_self=False)
+    
 socketio.run(
     app,
     host=os.getenv('IP', '0.0.0.0'),

@@ -5,3 +5,9 @@ export function ListItem(props){
             {props.name}
         </li>
 }
+
+export function listUser(props){
+    return <li>
+{props.name}
+        </li>
+}
