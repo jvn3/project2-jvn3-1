@@ -1,0 +1,26 @@
+.mainLayout{
+    display: grid;
+    grid-template-columns: 300px 300px;
+}
+
+.container_login{
+    text-align: center;
+    margin-left: 50%;
+}
+
+.ulClass{
+    overflow: hidden;
+}
+
+.mainLayout{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    padding-left: 316px;
+    gap: 420px;
+}
+
+.chatRoom{
+    width: 526px;
+    height: 570px;
+
+}
