@@ -8,10 +8,7 @@ import {PopLogIn} from './LogIn';
 import { Button, ButtonToolbar} from 'react-bootstrap';
 import {userList} from './userList'
 const socket = io();
-const styles = {
-    width: '200px',
-    margin: '20px auto',
-};
+
 
 function App() {
   

@@ -4,32 +4,38 @@
 }
 
 
+
+
 .boardName { 
     grid-area: header; 
-    
+    font-weight: 700;
+    font-size: 30px;
 }
 
 .userListgrid { grid-area: menu; 
-    
+    font-size: 17px;
 }
 
 .mainBoardGrid { 
     grid-area: main; 
-    
+    font-size: 17px;
 }
 
 .chatBoxgrid { 
     grid-area: right;
     font-size: 20px;
+    font-size: 17px;
 }
 
 .p{
     text-align: left;
     font-size: 17px;
+    
 }
 
 .highScore { 
     grid-area: footer; 
+    
     
 }
 
@@ -42,7 +48,9 @@
     'menu footer footer footer footer footer';
   grid-gap: 10px;
   padding: 10px;
-  background-image: url('https://image.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_1048-11333.jpg');
+  /* https://images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
+  background-image: url(https://images.pexels.com/photos/713664/pexels-photo-713664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+  background-repeat: no-repeat;
   background-size: cover;
   color: white;
 }
@@ -54,5 +62,5 @@
   font-family: 'Lucida Handwriting', cursive;
   text-align: center;
   padding: 45px 0;
-  font-size: 17px;
+  
 }
