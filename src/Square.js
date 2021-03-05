@@ -1,12 +1,12 @@
 import React from 'react';
 
 const style = {
-    background: 'lightblue',
-    border: '2px solid darkblue',
-    fontSize: '30px',
-    fontWeight: '800',
+    background: 'white',
+    fontSize: '50px',
+    fontWeight: '520',
     cursor: 'pointer',
-    outline: 'none'
+    outline: 'none',
+    fontFamily: " 'Lucida Handwriting', cursive "
 };
 
 const Square = ({ value, onClick }) => (
