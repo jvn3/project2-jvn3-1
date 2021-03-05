@@ -29,13 +29,18 @@ function App() {
   var counter = 0;
  const [localName, setLocalName] = useState([]);   // local name of user 
   const addModalClose = () => setModalShow=false;
+  var winnerName='';
   
-  
+  if(winner=='X'){
+    winnerName=name[0];
+  }else if (winner=='O'){
+    winnerName = name[1];
+  }
 
   
   function onClickButton(){
     if (inputRef != null){
-      const message = name + ': ' + inputRef.current.value;
+      const message = localName[0] + ': ' + inputRef.current.value;
       setMessages(prevMessages => [...prevMessages, message]);
       socket.emit('chat', {message: message});
     }
@@ -64,6 +69,7 @@ function App() {
         const cc = Number(i);
         socket.emit('isPlay', cc);
       }
+      
       else if(localName[0] == name[1] && !xIsNext){
       const boardCopy = [...board];
       if(winner || boardCopy[i]) return;
@@ -121,30 +127,29 @@ function App() {
   }, [restartGame]);
 
     return (
-        <>  
-        <div>
-        <div> 
-              {PopLogIn(modalIsOpen, userName, fetchUserName)}
-            </div>
-            <div>
-            <Board squares={board} onClick={handleClick} />
-            <div style={styles}>
-                <p> X : {name[0]} O: {name[1]} </p>
-                <p>{winner ? 'Winner: ' + winner : 'Next Player: ' + (xIsNext ? 'X' : 'O')}</p>
-                <button onClick={restartGame}> Restart Game </button>
-            </div>
-            </div>
-          <div className="mainLayout">  
-            <div className="chatRoom">
-              {chatBox(messages, onClickButton, inputRef)}
-            </div>
-            
-            <div className="UserList">
-                {userList( name)}
-            </div>
-          </div>
-        </div>
-        </>
+    <>  
+    
+    <div> 
+      {PopLogIn(modalIsOpen, userName, fetchUserName)}
+    </div>
+   
+    <div class="grid-container">
+      <div class="boardName">  {localName[0]}'s Board </div>
+      <div class="userListgrid"> {userList( name)} </div>
+      
+      <div class="mainBoardGrid"> 
+        <Board squares={board} onClick={handleClick} />  
+         <p> &emsp; X : {name[0]} &emsp;  &ensp;  O: {name[1]} </p>
+         <p> &emsp; {winner ? 'Winner: ' + winnerName : 'Next Player: ' + (xIsNext ? name[0]: name[1])} </p>
+         <p> &emsp; &emsp; <button onClick={restartGame}> Restart Game </button> </p>
+      </div> 
+      
+      <div class="chatBoxgrid"> {chatBox(messages, onClickButton, inputRef)} </div>
+      
+      <div class="highScore">HIGH SCORE</div>
+    </div>
+    
+    </>
     )
 }
 

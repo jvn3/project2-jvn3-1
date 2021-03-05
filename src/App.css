@@ -1,26 +1,58 @@
-.mainLayout{
-    display: grid;
-    grid-template-columns: 300px 300px;
-}
-
-.container_login{
-    text-align: center;
-    margin-left: 50%;
-}
 
 .ulClass{
-    overflow: hidden;
+    text-align: left;
 }
 
-.mainLayout{
-    display: grid;
-    grid-template-columns: 300px 300px;
-    padding-left: 316px;
-    gap: 420px;
+
+.boardName { 
+    grid-area: header; 
+    
 }
 
-.chatRoom{
-    width: 526px;
-    height: 570px;
+.userListgrid { grid-area: menu; 
+    
+}
 
+.mainBoardGrid { 
+    grid-area: main; 
+    
+}
+
+.chatBoxgrid { 
+    grid-area: right;
+    font-size: 20px;
+}
+
+.p{
+    text-align: left;
+    font-size: 17px;
+}
+
+.highScore { 
+    grid-area: footer; 
+    
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  grid-gap: 10px;
+  padding: 10px;
+  background-image: url('https://image.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_1048-11333.jpg');
+  background-size: cover;
+  color: white;
+}
+
+.grid-container > div {
+  border-style: dotted;
+  border-radius: 5px;
+  border-width: 1px;
+  font-family: 'Lucida Handwriting', cursive;
+  text-align: center;
+  padding: 45px 0;
+  font-size: 17px;
 }
