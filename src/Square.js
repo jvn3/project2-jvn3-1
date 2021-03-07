@@ -1,7 +1,10 @@
 import React from 'react';
-
+import './App.css'
 const style = {
-    background: 'white',
+    border: '1px solid white',
+    background: 'transparent',
+    color: 'white',
+    borderRadius: '5px',
     fontSize: '50px',
     fontWeight: '520',
     cursor: 'pointer',

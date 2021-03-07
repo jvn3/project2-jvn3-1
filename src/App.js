@@ -5,39 +5,68 @@ import io from 'socket.io-client';
 import {calculateWinner} from './helper';
 import {chatBox} from './ChatBox';
 import {PopLogIn} from './LogIn';
-import { Button, ButtonToolbar} from 'react-bootstrap';
 import {userList} from './userList'
+import {ListItem} from './ListItem';
+import {highScoreBoard} from './highScore';
+import {listHighScore} from './ListItem';
 const socket = io();
-const styles = {
-    width: '200px',
-    margin: '20px auto',
-};
+var winnerName='';
 
 function App() {
-  
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
   const winner = calculateWinner(board);
-  const [user, setUser] = useState([]);
   const inputRef = useRef(null);
   const userName = useRef(null);
   const [messages, setMessages] = useState([]);
   const [modalShow, setModalShow] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const [name, setName] = useState([]);
-//  const [ID, setID] = useState([0]);
-  var counter = 0;
+  const [dbUser, setDbUser] = useState([]);
+  const [dbScore, setDbScore] = useState([]);
+  const [ID, setID] = useState([]);
+  const [isShow, setIsShow] = useState(false);
+  
+var counter = 0;
+
+
  const [localName, setLocalName] = useState([]);   // local name of user 
   const addModalClose = () => setModalShow=false;
-  var winnerName='';
   
-  if(winner=='X'){
-    winnerName=name[0];
-  }else if (winner=='O'){
-    winnerName = name[1];
-  }
-
+  let cond = false;
+  var opponentName='';
+  let winnerIndex;
+  var dic = {};
+  let opponentIndex;
   
+  
+  useEffect(() => {
+    if(winner=='X'){
+      winnerName=name[0];
+      opponentName=name[1];
+      winnerIndex = dbUser.indexOf(winnerName);
+      opponentIndex = dbUser.indexOf(opponentName);
+      cond = true;
+    } else if (winner=='O'){
+      winnerName = name[1];
+      opponentName=name[0];
+      opponentIndex = dbUser.indexOf(opponentName);
+      winnerIndex = dbUser.indexOf(winnerName);
+      cond = true;
+    }
+  
+    
+      if(cond===true){
+        dic = {'winnerName': winnerName, 'opponentName': opponentName, 'winnerIndex': winnerIndex, 'opponentIndex': opponentIndex};
+        console.log('Chat event received!');
+        console.log(dic);
+        if(localName[0]===name[0]){
+          socket.emit('winner', {dic});
+        }
+      }
+  }, [winner]);
+  
+    
   function onClickButton(){
     if (inputRef != null){
       const message = localName[0] + ': ' + inputRef.current.value;
@@ -51,84 +80,102 @@ function App() {
       const user_name = userName.current.value;
       setName(prevName => [...prevName, user_name]);
       setLocalName(prevLocalName => [...prevLocalName, user_name]);
-      setModalIsOpen(false)
+      setModalIsOpen(false);
       counter = counter + 1;
       socket.emit('logIn', {user_name});
     }
   }
   
     function handleClick(i){
-    
+    console.log(xIsNext);
     if(localName[0] == name[0] || localName[0] == name[1]){
       if(localName[0] == name[0] && xIsNext){
       const boardCopy = [...board];
+      console.log("BOARD COPY");
+      console.log(boardCopy);
+      let turn = '';
       if(winner || boardCopy[i]) return;
-        boardCopy[i] = xIsNext ? 'X' : 'O';
-        setBoard(boardCopy);
-        setXisNext(!xIsNext);
+        turn = xIsNext ? 'X' : 'O';
+        //setBoard(boardCopy);
+        
+        setBoard((prevBoard) => {
+          let newBoard = [...prevBoard];
+          newBoard[i] = turn;
+          return newBoard;
+        });
+        setXisNext(tempXIsNext => tempXIsNext = !tempXIsNext);
         const cc = Number(i);
-        socket.emit('isPlay', cc);
+        socket.emit('isPlay', {cc: cc, turn:xIsNext});
       }
       
       else if(localName[0] == name[1] && !xIsNext){
       const boardCopy = [...board];
+      let turn = '';
       if(winner || boardCopy[i]) return;
-        boardCopy[i] = xIsNext ? 'X' : 'O';
-        setBoard(boardCopy);
-        setXisNext(!xIsNext);
+        turn = xIsNext ? 'X' : 'O';
+        setBoard((prevBoard) => {
+          let newBoard = [...prevBoard];
+          newBoard[i] = turn;
+          return newBoard;
+        });
+        setXisNext(tempXIsNext => tempXIsNext = !tempXIsNext);
         const cc = Number(i);
-        socket.emit('isPlay', cc);
+        socket.emit('isPlay', {cc: cc, turn:xIsNext});
       }
     }
     }
 
-    useEffect(() => {
-    socket.on('logIn', (data) => {
-      console.log('New user logged in ' + data.user_name);
-      setName(prevName => [...prevName, data.user_name]);
-    });
-  }, []);
 
   
   function restartGame(){
-    setBoard(Array(9).fill(null));
-    setXisNext(true);
+    const tempList = [null, null, null, null, null, null, null, null, null];
+    setBoard(tempList);
+    setXisNext(tempXIsNext => tempXIsNext = true);
     const data = 'game cleared';
     socket.emit('game', data);
   }
-  
-  
-  useEffect(() => {
-    socket.on('isPlay', (data) => {
-      console.log('A move had been made at ' + (data+1));
-      const boardCopy = [...board];
-      if(winner || boardCopy[data]) return;
-      boardCopy[data] = xIsNext ? 'X' : 'O';
-      setBoard(boardCopy);
-      setXisNext(!xIsNext);
-    });
-  }, [handleClick]);
-  
 
-  useEffect(() => {
-    socket.on('chat', (data) => {
-      console.log('Chat event received!');
-      console.log(data);
-      setMessages(prevMessages => [...prevMessages, data.message]);
+  
+  
+    useEffect(() => {
+    
+      socket.on('user_list', (data) => {
+        setDbUser(data.users);
+        setDbScore(data.score);
+        setID(data.id);
+      });
+      
+      socket.on('game', (data) => {
+        const tempList = [null, null, null, null, null, null, null, null, null];
+        setBoard(tempList);
+        console.log(data);
+        setXisNext(tempXIsNext => tempXIsNext = true);
+      });
+    
+      socket.on('chat', (data) => {
+        setMessages(prevMessages => [...prevMessages, data.message]);
+      });
+    
+      socket.on('logIn', (data) => {
+        console.log('New user logged in ' + data.user_name);
+        setName(prevName => [...prevName, data.user_name]);
+      });
+    
+      socket.on('isPlay', (data) => {
+        console.log('A move had been made at ' + (data.cc+1));
+        setXisNext(tempXIsNext => tempXIsNext = !tempXIsNext);
+        setBoard((prevBoard) => {
+        let newBoard = [...prevBoard];
+        newBoard[data.cc] = data.turn ? 'X' : 'O';
+        return newBoard;
+      });
+      
     });
   }, []);
   
-  useEffect(() => {
-    socket.on('game', (data) => {
-      console.log(data);
-      setBoard(Array(9).fill(null));
-      setXisNext(true);
-    });
-  }, [restartGame]);
-
+  
     return (
-    <>  
-    
+    <div>
     <div> 
       {PopLogIn(modalIsOpen, userName, fetchUserName)}
     </div>
@@ -146,11 +193,30 @@ function App() {
       
       <div class="chatBoxgrid"> {chatBox(messages, onClickButton, inputRef)} </div>
       
-      <div class="highScore">HIGH SCORE</div>
+      
+          <button onClick={()=>setIsShow(!isShow)}> Show Leader Board  </button>
+          <div class="highScore">
+          {
+            isShow ?
+          <div>
+            <div className="userListScore">
+              {dbUser.map((item, index) => <ListItem key={index} name= {item} />)}
+            </div>
+            
+            <div className="scoreList">
+              {dbScore.map((item, index) => <ListItem key={index} name= {item} />)}
+            </div>
+          </div>
+          :null
+            
+          }
+          </div>
+      </div>
     </div>
-    
-    </>
-    )
+
+ 
+    );
 }
+
 
 export default App;
