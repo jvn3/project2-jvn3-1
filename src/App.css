@@ -34,7 +34,11 @@
 }
 
 .highScore { 
-    grid-area: footer; 
+    grid-area: footer;
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    padding-left: 20px;
+    padding: 10px;
     
     
 }
@@ -63,4 +67,16 @@
   text-align: center;
   padding: 45px 0;
   
+}
+
+table {
+  font-family: 'Lucida Handwriting', cursive;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }

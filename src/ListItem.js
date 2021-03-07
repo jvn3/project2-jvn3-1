@@ -8,6 +8,12 @@ export function ListItem(props){
 
 export function listUser(props){
     return <li>
-{props.name}
-        </li>
+        {props.name}
+    </li>
+}
+
+export function listHighScore(props){
+    return <li>
+    {props.name} : {props.score}
+    </li>
 }
