@@ -12,14 +12,15 @@ export function PopLogIn(modalIsOpen ,userName, fetchUserName){
         },
         content: {
             color: 'orange'
-        }
-    }
-    
+        },
+        
+
+    };
     
     
     return (
         <div className='LogIn'> 
-            <Modal isOpen={modalIsOpen} style={style}> 
+            <Modal isOpen={modalIsOpen} style={style} className='modalLogIn'> 
             <center>
                 <h2> Log In Page </h2>
                     <div class="container">

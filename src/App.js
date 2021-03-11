@@ -26,6 +26,7 @@ function App() {
   const [dbScore, setDbScore] = useState([]);
   const [ID, setID] = useState([]);
   const [isShow, setIsShow] = useState(false);
+  const [isHighScoreModal, setIsHighScoreModal] = useState(false);
   
 var counter = 0;
 
@@ -175,11 +176,12 @@ var counter = 0;
   
   
     return (
+    <div className="Main">
     <div>
     <div> 
       {PopLogIn(modalIsOpen, userName, fetchUserName)}
     </div>
-   
+   <div className="Main">
     <div class="grid-container">
       <div class="boardName">  {localName[0]}'s Board </div>
       <div class="userListgrid"> {userList( name)} </div>
@@ -192,25 +194,11 @@ var counter = 0;
       </div> 
       
       <div class="chatBoxgrid"> {chatBox(messages, onClickButton, inputRef)} </div>
-      
-      
-          <button onClick={()=>setIsShow(!isShow)}> Show Leader Board  </button>
           <div class="highScore">
-          {
-            isShow ?
-          <div>
-            <div className="userListScore">
-              {dbUser.map((item, index) => <ListItem key={index} name= {item} />)}
-            </div>
-            
-            <div className="scoreList">
-              {dbScore.map((item, index) => <ListItem key={index} name= {item} />)}
-            </div>
+            {highScoreBoard(dbUser, dbScore, ID, isHighScoreModal, setIsHighScoreModal)}
           </div>
-          :null
-            
-          }
-          </div>
+        </div>
+       </div>
       </div>
     </div>
 

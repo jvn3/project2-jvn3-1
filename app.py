@@ -106,13 +106,17 @@ def logIn(data):
         db.session.add(new_user)
         db.session.commit()
         
-    all_people = models.Player.query.all()   
+    
+    all_people = db.session.query(models.Player)
+    descendingList = sqlalchemy.sql.expression.desc(models.Player.score)
+    queryDescending = all_people.order_by(descendingList)
+    
+    dic = {}
     users=[]
     score=[]
     ID=[]
-    dic = {}
     
-    for person in all_people:
+    for person in queryDescending:
         users.append(person.userName)
         ID.append(person.id)
         score.append(person.score)
