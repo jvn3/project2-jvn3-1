@@ -7,7 +7,9 @@ export function userList(name){
     const style={
         width: "70%",
         margin: "auto",
-        color: "green"
+        color: "green",
+        fontFamily: "monospace",
+        fontSize: "28px",
     };
 
     return(
@@ -23,3 +25,4 @@ export function userList(name){
 }
 
 export default userList
+

@@ -193,14 +193,18 @@ var counter = 0;
         <div>
           <h4 className="chatRoomHeader"> {localName[0]}'s Boards </h4>
         </div>
-        <Board squares={board} onClick={handleClick} />  
+      <div className="upperBoardDiv">
+        <Board squares={board} onClick={handleClick} /> 
+        
+      </div>
         <div className="infoScreen">
          <p> &emsp; X : {name[0]} &emsp;  &ensp;  O: {name[1]} </p>
          <p> &emsp; {winner ? 'Winner: ' + winnerName : 'Next Player: ' + (xIsNext ? name[0]: name[1])} </p>
         </div>
         <div className="RestartButtonDivElement">
           <p> &emsp; &emsp; <button className="buttonRestartGame" onClick={restartGame}> Restart Game </button> </p>
-        </div>
+        
+      </div>
       </div> 
       
       <div className="chatBoxDiv">
