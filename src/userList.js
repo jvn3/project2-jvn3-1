@@ -6,12 +6,15 @@ export function userList(name){
 
     const style={
         width: "70%",
-        margin: "auto"
+        margin: "auto",
+        color: "green"
     };
 
     return(
         <div>
-            <p className="heading" > USER LIST </p>
+            <div className="userListHeaderDiv">
+            <h4 className="chatRoomHeader" > Online Friends </h4>
+            </div>
             <ul style={style}>
                  {name.map((item, index) => <ListItem key={index} name= {item} />)}
             </ul>
