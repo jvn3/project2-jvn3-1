@@ -1,10 +1,40 @@
-
 .ulClass{
     text-align: left;
 }
 
+.Main{
+    background: black;
+}
 
+.modalLogIn{
+    height: 300px;
+    width: 400px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -180px;
+    background-color: white;
+    border-radius: 5px;
+}
 
+.highScoreBoardModal1{
+    height: 600px;
+    width: 600px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -270px;
+    background-color: white;
+    border-radius: 5px;
+    tex-align:center;
+}
+
+.buttonHighScore{
+    position: absolute;
+    margin: auto;
+}
 
 .boardName { 
     grid-area: header; 
@@ -12,7 +42,8 @@
     font-size: 30px;
 }
 
-.userListgrid { grid-area: menu; 
+.userListgrid { 
+    grid-area: menu; 
     font-size: 17px;
 }
 
@@ -39,8 +70,7 @@
     grid-template-columns: 100px 100px 100px;
     padding-left: 20px;
     padding: 10px;
-    
-    
+    margin: auto;
 }
 
 
@@ -49,14 +79,21 @@
   grid-template-areas:
     'header header header header header header'
     'menu main main main right right'
-    'menu footer footer footer footer footer';
+    'none footer footer footer footer footer';
   grid-gap: 10px;
   padding: 10px;
   /* https://images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
-  background-image: url(https://images.pexels.com/photos/713664/pexels-photo-713664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+   
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+}
+
+.grid-container > header {
+    grid-area: menu;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
 }
 
 .grid-container > div {
@@ -71,12 +108,14 @@
 
 table {
   font-family: 'Lucida Handwriting', cursive;
-  border-collapse: collapse;
   width: 100%;
 }
 
 td, th {
   border: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   padding: 8px;
 }

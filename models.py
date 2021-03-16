@@ -1,10 +1,11 @@
-from app import db
+""" Models.py Database """
+from app import DB
 
-
-class Player(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    userName = db.Column(db.String(80), unique=True, nullable=False)
-    score = db.Column(db.Integer)
-    
+class Player(DB.Model):
+    """ Player Table Column and rows for the DB """
+    id = DB.Column(DB.Integer, primary_key=True)
+    userName = DB.Column(DB.String(80), unique=True, nullable=False)
+    score = DB.Column(DB.Integer)
     def __repr__(self):
         return '<Player %d %r %d>' % (self.id, self.userName, self.score)
+    
