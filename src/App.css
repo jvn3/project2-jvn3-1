@@ -34,28 +34,182 @@
 .buttonHighScore{
     position: absolute;
     margin: auto;
+    background-color: #4CAF50;
+    border: aliceblue;
+    color: white;
+    padding: 9px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 }
+
+.sendButton{
+    position: absolute;
+    margin: auto;
+    background-color: #4CAF4E;
+    border: aliceblue;
+    color: white;
+    padding: 3px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttonRestartGame{
+    position: absolute;
+    margin: auto;
+    background-color: #f44336;
+    border: aliceblue;
+    color: white;
+    padding: 9px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.mainBoardHeader{
+    font-size: 17px;
+    font-family: monospace;
+}
+
+.chatBoxDiv {
+    border-left-style: double;
+}
+.infoScreen{
+    font-family: monospace;
+    padding-left: 50px;
+}
+
+.RestartButtonDivElement{
+    padding-right: 70px;
+}
+.Square {
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    borderRadius: 5px;
+    
+    fontSize: 500px;
+    fontWeight: 520;
+    cursor: pointer;
+    outline: none;
+}
+
+.Square:hover {
+  cursor: pointer;
+  background: orange;
+  color: white;
+}
+
+.Square:nth-child(1){
+    border-top-style: none;
+    border-left-style: none;
+}
+
+.Square:nth-child(4){
+    border-top-style:none;
+    border-left-style:none;
+}
+
+.Square:nth-child(7){
+    border-top-style:none;
+    border-left-style:none;
+    border-bottom-style:none;
+}
+
+.Square:nth-child(2){
+    border-top-style:none;
+}
+
+.Square:nth-child(5){
+    border-top-style:none;
+}
+
+.Square:nth-child(8){
+    border-top-style:none;
+    border-bottom-style: none;
+}
+
+.Square:nth-child(3){
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.Square:nth-child(6){
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.Square:nth-child(9){
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style:none;
+}
+
+
+
+.board {
+	width: 300px; /* Total horizontal dimensions */
+	height: 300px; /* Total vertical dimensions */
+	display: grid; /* Enables CSS Grid */ 
+	grid-template-columns: repeat(3, 1fr); /* Total horizontal space broken into 3 columns */
+  grid-template-rows: repeat(3, 1fr); /* Total vertical space broken into 3 rows */
+  padding-left: 82px;
+}
+
 
 .boardName { 
-    grid-area: header; 
-    font-weight: 700;
-    font-size: 30px;
+    grid-area: header;
+    font-weight: 10;
+    font-style: normal;
+    font-family: monospace;
+    font-size: 20px;
 }
 
-.userListgrid { 
-    grid-area: menu; 
+.userListgrid {
+    grid-area: menu;
     font-size: 17px;
+    border-right-style: double;
 }
 
 .mainBoardGrid { 
     grid-area: main; 
-    font-size: 17px;
+    font-size: 21px;
+    font-family: monospace;
+    
 }
 
 .chatBoxgrid { 
     grid-area: right;
     font-size: 20px;
     font-size: 17px;
+    padding-left: 66px;
+}
+
+.chatRoomHeaderDiv{
+    padding-bottom: 20px;
+}
+
+.userListHeaderDiv{
+    
+}
+
+.boardNameHeaderDiv{
+        
+}
+
+.chatRoomHeader {
+    color: red;
+}
+
+.BoardNameHeader{
+    
 }
 
 .p{
@@ -68,8 +222,8 @@
     grid-area: footer;
     display: grid;
     grid-template-columns: 100px 100px 100px;
-    padding-left: 20px;
-    padding: 10px;
+    padding-left: 10px;
+    padding: 5px;
     margin: auto;
 }
 
@@ -78,10 +232,10 @@
   display: grid;
   grid-template-areas:
     'header header header header header header'
-    'menu main main main right right'
-    'none footer footer footer footer footer';
-  grid-gap: 10px;
-  padding: 10px;
+    'menu main right extra extra extra'
+    'none none none none none none';
+  grid-gap: 1px;
+  padding: 5px;
   /* https://images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
    
   background-repeat: no-repeat;
@@ -89,22 +243,17 @@
   color: white;
 }
 
-.grid-container > header {
-    grid-area: menu;
-    border-top: none;
-    border-left: none;
-    border-bottom: none;
-}
+
 
 .grid-container > div {
-  border-style: dotted;
-  border-radius: 5px;
-  border-width: 1px;
-  font-family: 'Lucida Handwriting', cursive;
-  text-align: center;
-  padding: 45px 0;
-  
+    border-width: 2px;
+    
+    text-align: center;
+    padding: 42px 0;
 }
+
+
+
 
 table {
   font-family: 'Lucida Handwriting', cursive;
@@ -119,3 +268,7 @@ td, th {
   border-right: none;
   padding: 8px;
 }
+
+
+
+
