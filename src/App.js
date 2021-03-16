@@ -183,20 +183,30 @@ var counter = 0;
     </div>
    <div className="Main">
     <div class="grid-container">
-      <div class="boardName">  {localName[0]}'s Board </div>
+      <div class="boardName">  
+      <p>Welcome to the tic-tac-toe game</p>
+      <p>Hey {localName[0]}, what's popping man? Chat with your online friends and let them know you are playing!</p>
+      </div>
       <div class="userListgrid"> {userList( name)} </div>
       
-      <div class="mainBoardGrid"> 
+      <div class="mainBoardGrid">
+        <div>
+          <h4 className="chatRoomHeader"> {localName[0]}'s Boards </h4>
+        </div>
         <Board squares={board} onClick={handleClick} />  
+        <div className="infoScreen">
          <p> &emsp; X : {name[0]} &emsp;  &ensp;  O: {name[1]} </p>
          <p> &emsp; {winner ? 'Winner: ' + winnerName : 'Next Player: ' + (xIsNext ? name[0]: name[1])} </p>
-         <p> &emsp; &emsp; <button onClick={restartGame}> Restart Game </button> </p>
+        </div>
+        <div className="RestartButtonDivElement">
+          <p> &emsp; &emsp; <button className="buttonRestartGame" onClick={restartGame}> Restart Game </button> </p>
+        </div>
       </div> 
       
-      <div class="chatBoxgrid"> {chatBox(messages, onClickButton, inputRef)} </div>
-          <div class="highScore">
-            {highScoreBoard(dbUser, dbScore, ID, isHighScoreModal, setIsHighScoreModal)}
+      <div className="chatBoxDiv">
+      <div class="chatBoxgrid"> {chatBox(messages, onClickButton, inputRef, dbUser, dbScore, ID, isHighScoreModal, setIsHighScoreModal, highScoreBoard)} </div>
           </div>
+
         </div>
        </div>
       </div>
