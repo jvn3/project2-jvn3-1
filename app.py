@@ -106,6 +106,5 @@ if __name__ == "__main__":
     SOCKETIO.run(
         APP,
         host=os.getenv('IP', '0.0.0.0'),
-        debug=True,
         port=8081 if os.getenv('C9_PORT') else int(os.getenv('PORT', 8081)),
     )

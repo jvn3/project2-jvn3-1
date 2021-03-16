@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import {useEffect, useState, useRef} from 'react';
 import './App.css'
 
-Modal.setAppElement('#root');
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 export function PopLogIn(modalIsOpen ,userName, fetchUserName){
     
     const style = {
