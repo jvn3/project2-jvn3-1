@@ -41,15 +41,4 @@ Once these steps are finished. Run the following code in your terminal.
 3. Push to Heroku: `git push heroku {your_branch_name}:main`
 
 
-## Known Problems
-1. The main known problem was when the game finishes. It is really unfair that player 1 get to play turn 1.
-
-2. If had more time, I would implement  log in and log out function and make the state for whose turn is it. (Player 1 or Player 2)
-
-## Technical Difficulies
-1. I had useEffect rendering everytime the program runs. Therefore, I had to re-structure the whole code to not let that happen. 
-   If I didn't have done this, I will get timeouterror and packet load error.
-
-2.  I had trouble first using the react component. For instance, useState, useEffect. I'd run into mountains of error. 
-    Then, I did some practice watching online videos in regards to these states.
 
